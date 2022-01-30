@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { SectionPath } from '../enums/admin/Sections';
 import MobileSidebar from '../components/MobileSidebar';
 import { WalletProvider } from 'components/wallet/WalletProvider';
+import { ContractInteractionProvider } from 'components/blockchain-contracts/ContractInteractionProvider';
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -47,15 +48,17 @@ export default function Admin() {
 
   return (
     <WalletProvider>
-      <div className="flex h-screen overflow-hidden bg-gray-100">
-        <MobileSidebar
-          sidebarOpen={sidebarOpen}
-          reportSidebarOpen={setSidebarOpen}
-          navigation={navigation}
-        />
-        <Sidebar navigation={navigation} />
-        <Content reportSidebarOpen={setSidebarOpen} />
-      </div>
+      <ContractInteractionProvider>
+        <div className="flex h-screen overflow-hidden bg-gray-100">
+          <MobileSidebar
+            sidebarOpen={sidebarOpen}
+            reportSidebarOpen={setSidebarOpen}
+            navigation={navigation}
+          />
+          <Sidebar navigation={navigation} />
+          <Content reportSidebarOpen={setSidebarOpen} />
+        </div>
+      </ContractInteractionProvider>
     </WalletProvider>
   );
 }
