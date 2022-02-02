@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { SectionPath } from '../enums/admin/Sections';
 import MobileSidebar from '../components/MobileSidebar';
 import { WalletProvider } from 'components/wallet/WalletProvider';
-import { ContractInteractionProvider } from 'components/blockchain-contracts/ContractInteractionProvider';
+import { ContractInteractionProvider } from 'components/smart-contracts/ContractInteractionProvider';
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
