@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { useWallet } from 'components/wallet/useWallet';
 import { ERC20ApprovalProvider } from 'components/smart-contracts/ERC20ApprovalProvider';
-import { Modal } from 'components/ui/Modal';
 import {
   smartContractReducer,
   initialSmartContractsState,
@@ -46,21 +45,6 @@ export const ContractInteractionProvider = ({
   return (
     <SmartContractContext.Provider value={initialSmartContractsContext}>
       <ERC20ApprovalProvider>{children}</ERC20ApprovalProvider>
-
-      <Modal
-        title="Confirming Approval"
-        icon="ClockIcon"
-        isOpen={contractsState.approvingERC20}
-      >
-        <p>Please wait for this transaction to confirm on the blockchain.</p>
-      </Modal>
-      <Modal
-        title="Revoking Approval"
-        icon="ClockIcon"
-        isOpen={contractsState.revokingERC20}
-      >
-        <p>Please wait for this transaction to confirm on the blockchain.</p>
-      </Modal>
     </SmartContractContext.Provider>
   );
 };

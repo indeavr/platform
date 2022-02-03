@@ -5,6 +5,7 @@ import {
 } from 'components/smart-contracts/useSmartContracts';
 
 import { ApproveERC20 } from 'components/smart-contracts/ApproveERC20';
+import { RevokeERC20 } from 'components/smart-contracts/RevokeERC20';
 
 const Community = () => {
   const [ownerAddress, setOwnerAddress] = useState<string | undefined>(
@@ -21,6 +22,7 @@ const Community = () => {
   };
 
   const [showApproveERC20, setShowApproveERC20] = useState(false);
+  const [showRevokeERC20, setShowRevokeERC20] = useState(false);
 
   // find Icon types at https://unpkg.com/browse/@heroicons/react@1.0.5/outline/index.js
   return (
@@ -59,10 +61,7 @@ const Community = () => {
         {contractsState.isERC20Approved && (
           <button
             onClick={() => {
-              dispatch({
-                type: SmartContractActions.REVOKE_ERC20,
-                payload: {},
-              });
+              setShowRevokeERC20(true);
             }}
             type="button"
             className="focus:outline-none inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-white shadow-sm hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
@@ -76,6 +75,10 @@ const Community = () => {
         show={showApproveERC20}
         onFinish={() => setShowApproveERC20(false)}
       ></ApproveERC20>
+      <RevokeERC20
+        show={showRevokeERC20}
+        onFinish={() => setShowRevokeERC20(false)}
+      ></RevokeERC20>
     </>
   );
 };

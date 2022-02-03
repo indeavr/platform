@@ -5,9 +5,9 @@ import {
   SmartContractAddresses,
 } from 'components/smart-contracts/useSmartContracts';
 import { TransactionModal } from 'components/smart-contracts/TransactionModal';
-import { ethers, constants } from 'ethers';
+import { ethers } from 'ethers';
 
-export const ApproveERC20 = ({
+export const RevokeERC20 = ({
   show,
   onFinish,
 }: {
@@ -16,27 +16,21 @@ export const ApproveERC20 = ({
 }) => {
   const { contractsState, dispatch } = useSmartContracts();
 
-  // the logic called to initiate the transaction
   const onBegin = async () => {
-    return contractsState.ERC20.approve(
-      SmartContractAddresses.Job,
-      constants.MaxUint256
-    );
+    return contractsState.ERC20.approve(SmartContractAddresses.Job, 0);
   };
 
-  // what to do when the transaction is confirmed on the blockchain
   const onConfirmed = (receipt: ethers.providers.TransactionReceipt) => {
     dispatch({
       type: SmartContractActions.UPDATE_ERC20_APPROVAL,
-      payload: { approved: true },
+      payload: { approved: false },
     });
   };
 
-  // render the transaction modal
   return (
     <>
       <TransactionModal
-        title="Approving Spending Allowance"
+        title="Revoke Spending Allowance"
         {...{ show, onBegin, onConfirmed, onFinish }}
       ></TransactionModal>
     </>

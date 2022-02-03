@@ -1,6 +1,7 @@
 import { Listener } from '@ethersproject/providers';
 import { BigNumber } from 'ethers';
 import {
+  SmartContractAddresses,
   useSmartContracts,
   SmartContractActions,
 } from 'components/smart-contracts/useSmartContracts';
@@ -30,7 +31,7 @@ export const ERC20ApprovalProvider = ({
       if (wallet.account) {
         return contractsState.ERC20.filters.Approval(
           wallet.account,
-          process.env.REACT_APP_JOB_CONTRACT_ADDRESS ?? ''
+          SmartContractAddresses.Job
         );
       }
     },
